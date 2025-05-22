@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seguimiento de Calificaciones</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Seguimiento de Calificaciones de Estudiantes</h1>
+
+    <div id="promedio">Promedio de Calificaciones: No Disponible</div>
+
+    <form id="formulario" novalidate autocomplete="off">
+      <div class="campo">
+        <label for="nombre">Nombre:</label>
+        <input
+          type="text"
+          id="nombre"
+          name="no-autofill-nombre"
+          autocomplete="no"
+        />
+        <span class="error" id="errorNombre"></span>
+      </div>
+
+      <div class="campo">
+        <label for="apellido">Apellido:</label>
+        <input
+          type="text"
+          id="apellido"
+          name="no-autofill-apellido"
+          autocomplete="no"
+        />
+        <span class="error" id="errorApellido"></span>
+      </div>
+
+      <div class="campo">
+        <label for="nota">Calificación (1.0 - 7.0):</label>
+        <input
+          type="number"
+          id="nota"
+          name="no-autofill-nota"
+          step="0.1"
+          min="1"
+          max="7"
+          autocomplete="no"
+        />
+        <span class="error" id="errorNota"></span>
+      </div>
+
+      <button type="submit">Agregar Estudiante</button>
+    </form>
+
+    <table id="tablaNotas">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Calificación</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script src="script.js"></script>
+  </body>
+</html>
