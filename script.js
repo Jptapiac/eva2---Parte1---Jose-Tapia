@@ -1,75 +1,106 @@
-const estudiantes = [];
-const form = document.getElementById("formulario");
-const tabla = document.querySelector("#tablaNotas tbody");
-const inputNota = document.getElementById("nota");
+const students = [];
+const tableBody = document.querySelector("#studentsTable tbody");
+const averageDiv = document.getElementById("average");
+const editIndexInput = document.getElementById("editIndex");
+const date = document.getElementById("date").value;
 
-inputNota.addEventListener("keydown", function(e) {
-  if (e.key === "e" || e.key === "E" || e.key === "+" || e.key === "-") {
+
+document.getElementById("studentForm").addEventListener("submit", function (e) {
     e.preventDefault();
-  }
+
+    const name = document.getElementById("name").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const grade = parseFloat(document.getElementById("grade").value);
+    const date = document.getElementById("date").value;
+
+    if (!name || !lastName || isNaN(grade) || grade < 1 || grade > 7 || !date) {
+        alert("Error: por favor ingrese todos los datos correctamente (nota entre 1 y 7 y fecha válida)");
+        return;
+    }
+
+    const student = {
+        name,
+        lastName,
+        grade,
+        date // ✅ Siempre toma la fecha del formulario, nueva o editada
+    };
+   
+    if (editIndexInput.value === "") {
+        students.push(student);
+        addStudentToTable(student);
+    } else {
+        const index = parseInt(editIndexInput.value);
+        students[index] = student;
+        updateStudentRow(index, student);
+        editIndexInput.value = "";
+    }
+
+    calcularPromedio();
+    this.reset();
 });
 
-form.addEventListener("submit", function(e) {
-  e.preventDefault();
-  limpiarErrores();
 
-  const nombre = document.getElementById("nombre").value.trim();
-  const apellido = document.getElementById("apellido").value.trim();
-  const notaValor = document.getElementById("nota").value.trim();
-  const nota = parseFloat(notaValor);
+function addStudentToTable(student) {
+    const index = students.length - 1;
+    const row = document.createElement("tr");
+    row.innerHTML = `
+    <td>${student.name}</td>
+    <td>${student.lastName}</td>
+    <td>${formatearFecha(student.date)}</td>
+    <td>${student.grade}</td>
+    <td>
+        <button class="edit-btn">Editar</button>
+        <button class="delete-btn">Eliminar</button>
+    </td>
+`;
 
-  let error = false;
-
-  if (nombre === "") {
-    mostrarError("errorNombre", "Por favor, ingrese el nombre.");
-    error = true;
-  }
-
-  if (apellido === "") {
-    mostrarError("errorApellido", "Por favor, ingrese el apellido.");
-    error = true;
-  }
-
-  if (notaValor === "") {
-    mostrarError("errorNota", "Por favor, ingrese una calificación.");
-    error = true;
-  } else if (isNaN(nota) || nota < 1 || nota > 7) {
-    mostrarError("errorNota",
-        
-        "La calificación debe estar entre 1.0 y 7.0.");
-    error = true;
-  }
-
-  if (error) return;
-
-  const estudiante = { nombre, apellido, nota };
-  estudiantes.push(estudiante);
-  agregarFila(estudiante);
-  actualizarPromedio();
-  form.reset();
-});
-
-function agregarFila(est) {
-  const fila = document.createElement("tr");
-  fila.innerHTML = `
-    <td>${est.nombre}</td>
-    <td>${est.apellido}</td>
-    <td>${est.nota.toFixed(1)}</td>
-  `;
-  tabla.appendChild(fila);
+    row.querySelector(".delete-btn").addEventListener("click", function () {
+        deleteEstudiante(student, row);
+    });
+    row.querySelector(".edit-btn").addEventListener("click", function () {
+        loadStudentToForm(student, index);
+    });
+    tableBody.appendChild(row);
 }
 
-function actualizarPromedio() {
-  const suma = estudiantes.reduce((acc, est) => acc + est.nota, 0);
-  const promedio = suma / estudiantes.length;
-  document.getElementById("promedio").textContent =
-    "Promedio de Calificaciones: " + promedio.toFixed(1);
+function updateStudentRow(index, student) {
+    const row = tableBody.rows[index];
+    row.cells[0].textContent = student.name;
+    row.cells[1].textContent = student.lastName;
+    row.cells[2].textContent = formatearFecha(student.date);
+    row.cells[3].textContent = student.grade;  // ✅ Esta es la nota
 }
 
-function mostrarError(id, mensaje) {
-  document.getElementById(id).textContent = mensaje;
+
+function loadStudentToForm(student, index) {
+    document.getElementById("name").value = student.name;
+    document.getElementById("lastName").value = student.lastName;
+    document.getElementById("grade").value = student.grade;
+    document.getElementById("date").value = student.date;
+    editIndexInput.value = index;
 }
 
-function limpiarErrores() {
-  document.querySelectorAll(".error").forEach(el => el.textContent = "");
+
+function deleteEstudiante(student, row) {
+    const index = students.indexOf(student);
+    if (index > -1) {
+        students.splice(index, 1);
+        calcularPromedio();
+        row.remove();
+    }
+}
+
+function calcularPromedio() {
+    if (students.length === 0) {
+        averageDiv.textContent = "Promedio General del Curso : N/A";
+        return;
+    }
+    const total = students.reduce((sum, student) => sum + student.grade, 0);
+    const prom = total / students.length;
+    averageDiv.textContent = "Promedio General del Curso : " + prom.toFixed(2);
+}
+
+function formatearFecha(fechaISO) {
+    const [year, month, day] = fechaISO.split("-");
+    return `${day}/${month}/${year}`; // Formato dd/mm/aaaa
 }
