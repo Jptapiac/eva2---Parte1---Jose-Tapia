@@ -1,52 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #eaf0ff;
-  color: #222;
+  font-family: 'Nunito', sans-serif;
+  background-color: #f1f9f1;
+  color: #2e3d27;
   margin: 0;
   padding: 20px;
 }
 
 h2 {
   text-align: center;
-  font-size: 2rem;
-  color: #002f6c;
-  margin-bottom: 30px;
+  font-size: 2.2rem;
+  color: #3a5f0b;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 2px #cceacc;
 }
 
 #average {
-  max-width: 500px;
-  margin: 0 auto 30px auto;
-  padding: 12px;
-  background-color: #dfefff;
-  border: 2px solid #0056b3;
-  border-radius: 8px;
-  font-weight: bold;
+  background-color: #e4f7e4;
+  border: 2px solid #8fc93a;
+  border-radius: 10px;
+  padding: 15px;
   font-size: 1.2rem;
+  font-weight: bold;
   text-align: center;
-  color: #003b80;
+  color: #3a5f0b;
+  margin: 0 auto 20px auto;
+  max-width: 500px;
 }
 
-#stats {
+#summary {
+  background-color: #ecf9ec;
+  border: 2px solid #b2e088;
+  border-radius: 10px;
+  padding: 12px 20px;
   max-width: 500px;
   margin: 0 auto 30px auto;
-  padding: 12px;
-  background-color: #f0f9ff;
-  border: 2px solid #007bff;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 1.1rem;
-  color: #004080;
   text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #3a5f0b;
 }
 
 form {
-  max-width: 500px;
-  margin: 0 auto 40px auto;
-  background-color: white;
+  background-color: #ffffff;
+  border: 2px solid #a3d977;
+  border-radius: 12px;
   padding: 25px;
-  border-radius: 10px;
-  border: 2px solid #007bff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  box-shadow: 0 0 10px #cdebc0;
 }
 
 form div {
@@ -56,8 +59,8 @@ form div {
 label {
   display: block;
   font-weight: bold;
-  margin-bottom: 6px;
-  color: #003366;
+  margin-bottom: 5px;
+  color: #3a5f0b;
 }
 
 input[type="text"],
@@ -65,79 +68,92 @@ input[type="date"],
 input[type="number"] {
   width: 100%;
   padding: 10px;
+  border: 2px solid #c3e6c3;
+  border-radius: 6px;
+  background-color: #f8fff8;
+  color: #2e3d27;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
+}
+
+input:focus {
+  border-color: #8fc93a;
+  outline: none;
 }
 
 button[type="submit"] {
-  background-color: #007bff;
+  background-color: #f29f05;
   color: white;
+  font-size: 1.1rem;
   font-weight: bold;
   padding: 12px;
   width: 100%;
   border: none;
-  border-radius: 6px;
-  font-size: 1rem;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: #d97706;
 }
 
 table {
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   border-collapse: collapse;
   background-color: white;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 10px #cdebc0;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 1rem;
 }
 
-th,
-td {
-  border: 1px solid #ccc;
+th, td {
+  border: 1px solid #cdebc0;
   padding: 12px;
   text-align: center;
 }
 
 th {
-  background-color: #cce5ff;
-  color: #002b5c;
-  font-weight: bold;
+  background-color: #e6f6e6;
+  color: #3a5f0b;
 }
 
-button.edit-btn,
-button.delete-btn {
-  padding: 6px 10px;
-  margin: 2px;
-  border: none;
-  border-radius: 4px;
+td {
+  background-color: #fcfffc;
+}
+
+.edit-btn {
+  background-color: #84cc16;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
   font-weight: bold;
+  border: none;
   cursor: pointer;
 }
 
-button.edit-btn {
-  background-color: #ffc107;
-  color: #333;
+.edit-btn:hover {
+  background-color: #65a30d;
 }
 
-button.edit-btn:hover {
-  background-color: #e0a800;
-}
-
-button.delete-btn {
-  background-color: #dc3545;
+.delete-btn {
+  background-color: #ef4444;
   color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
 }
 
-button.delete-btn:hover {
-  background-color: #c82333;
+.delete-btn:hover {
+  background-color: #dc2626;
 }
 
-@media (max-width: 600px) {
+/* Responsive */
+@media (max-width: 768px) {
   body {
     padding: 10px;
   }
@@ -146,18 +162,41 @@ button.delete-btn:hover {
     font-size: 1.6rem;
   }
 
-  #average,
-  #stats,
-  form,
-  table {
+  form, #summary, #average, table {
     width: 100%;
-    max-width: none;
     box-sizing: border-box;
   }
 
-  th,
-  td {
-    font-size: 0.9rem;
+  table, tbody, tr, td {
+    display: block;
+    width: 100%;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 15px;
+    background-color: #ecf9ec;
+    border-radius: 10px;
     padding: 10px;
+  }
+
+  td {
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+    border: none;
+    border-bottom: 1px solid #cdebc0;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    top: 12px;
+    font-weight: bold;
+    color: #3a5f0b;
   }
 }
