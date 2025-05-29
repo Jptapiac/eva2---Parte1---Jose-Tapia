@@ -1,63 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notas Front-End</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notas Front-End</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h2>Notas Front-End</h2>
+  <h2>Notas Front-End</h2>
 
-    <div id="average">Promedio General del Curso : N/A</div>
+  <div id="average">Promedio General del Curso : N/A</div>
 
-    <div id="stats">
-        <p>Total de estudiantes: <span id="total">0</span></p>
-        <p>Aprobados: <span id="aprobados">0</span></p>
-        <p>Reprobados: <span id="reprobados">0</span></p>
+  <div id="summary">
+    <p>Total de Estudiantes: <span id="totalStudents">0</span></p>
+    <p>Eximidos (nota &ge; 5.0): <span id="approvedCount">0</span></p>
+    <p>Realizan Examen (nota &lt; 5.0): <span id="failedCount">0</span></p>
+  </div>
+
+  <form id="studentForm">
+    <input type="hidden" id="editIndex" value="">
+
+    <div>
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" required>
     </div>
-   
-    <form id="studentForm">
-        <input type="hidden" id="editIndex" value="">
-        <div>
-            <label for="name">Nombre:</label>
-            <input type="text" id="name" required>
-        </div>
-        <div>
-            <label for="lastName">Apellido:</label>
-            <input type="text" id="lastName" required>
-        </div>
-        <div>
-            <label for="date">Fecha:</label>
-            <input type="date" id="date" required>
-        </div>
-        <div>
-            <label for="grade">Nota:</label>
-            <input type="number" id="grade" step="0.1" min="1" max="7" required>
-        </div>
-        <button type="submit">Guardar Alumno</button>
-    </form>  
 
-    <table id="studentsTable" border="1" cellpadding="8" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Fecha</th>
-                <th>Nota</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Datos de las filas de cada alumno -->
-        </tbody>
-    </table>
+    <div>
+      <label for="lastName">Apellido:</label>
+      <input type="text" id="lastName" required>
+    </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <div>
+      <label for="date">Fecha (dd/mm/aaaa):</label>
+      <input type="date" id="date" required>
+    </div>
 
+    <div>
+      <label for="grade">Nota:</label>
+      <input type="number" id="grade" step="0.1" min="1" max="7" required>
+    </div>
 
-    <script src="script.js"></script>
+    <button type="submit">Guardar Alumno</button>
+  </form>
+
+  <table id="studentsTable" border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Fecha</th>
+        <th>Nota</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Filas dinámicas -->
+    </tbody>
+  </table>
+
+  <script src="script.js"></script>
 </body>
 </html>
